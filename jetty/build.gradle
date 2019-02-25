@@ -1,0 +1,19 @@
+// Javaのビルドスクリプト
+
+// プラグイン指定
+apply plugin: 'java'
+
+//フォルダーをEclipseプロジェクト化するのに必要
+apply plugin: 'eclipse'
+
+// WARを生成するのに必要
+apply plugin: 'war'
+
+// リポジトリ〜としてMavenリポジトリ〜を指定
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+}
