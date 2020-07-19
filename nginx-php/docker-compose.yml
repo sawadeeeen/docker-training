@@ -1,0 +1,33 @@
+version: '3'
+services:
+  web:
+    build: web
+    container_name: web
+    volumes:
+      - ./app:/usr/share/nginx/
+      - ./web/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8080:80"
+  app:
+    build: app
+    container_name: app
+    volumes:
+      - ./app:/usr/share/nginx/
+      - ./app/php.ini:/usr/local/etc/php/conf.d/php.ini
+    depends_on: ["db"]
+  db:
+    build: db
+    container_name: db
+    volumes:
+      - ./db/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_pass_fB3uWvTS
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    restart: always
+    ports: 
+      - "8088:80"
+    depends_on: ["db"]
+
